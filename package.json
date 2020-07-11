@@ -1,0 +1,25 @@
+{
+  "name": "ownly-one-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node -r esm .",
+    "production": "NODE_ENV=production&&npm start",
+    "dev": "set NODE_ENV=development&&npm start",
+    "debug": "set NODE_ENV=development&&node --nolazy --debug-brk=8080 index.js"
+  },
+  "dependencies": {
+    "@discordjs/opus": "^0.3.2",
+    "canvas": "^2.6.1",
+    "discord-youtube-api": "^0.1.0",
+    "discord.js": "^12.2.0",
+    "discord.js-commando": "discordjs/Commando",
+    "esm": "^3.2.25",
+    "ffmpeg-static": "^4.2.4",
+    "ytdl-core-discord": "^1.2.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
