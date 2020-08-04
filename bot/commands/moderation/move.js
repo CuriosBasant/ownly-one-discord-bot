@@ -18,8 +18,8 @@ export default class MoveCommand extends Command {
           prompt: 'Where to move the members?',
           parse: ( channelName, message ) => message.guild.channels.cache
             .find( channel => channel.type == 'voice' && channel.name.toLowerCase().includes( channelName.toLowerCase() ) ),
-          error: 'That specified channel doesnot exist in this server. Please try again!',
-          validate: value => value,
+          error: 'That channel doesnot exist in this server. Please try again!',
+          // validate: value => value,
         }
       ]
     } );

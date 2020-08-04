@@ -1,35 +1,48 @@
 import { CommandoClient } from 'discord.js-commando';
 import { Collection } from 'discord.js';
 import { join } from 'path';
+import fs from 'fs';
 
 import { BOT_PREFIX, OWNER_ID, BOT_TOKEN } from './config';
 
 
-const client = new CommandoClient( {
+const bot = new CommandoClient( {
   commandPrefix: BOT_PREFIX,
   owner: OWNER_ID,
-  // invite: 'https://discord.gg/bRCvFy9',
+  invite: 'https://discord.gg/uW82j6S',
+  // unknownCommandResponse: true,
+  disableEveryone: true,
 } );
 
-client.SERVERS = new Collection();
+bot.SERVERS = new Collection();
 
-client.registry
+bot.registry
   .registerDefaults()
   .registerGroups( [
     ['fun', 'A Fun Group'],
     ['image', ''],
     ['information', ''],
     ['miscellaneous', ''],
-    ['moderation', ''],
+    ['moderation', 'Moderation'],
     ['music', 'Music Group'],
+    ['economy', 'Economy'],
   ] )
   .registerCommandsIn( join( __dirname, './bot/commands' ) );
 
-client.once( 'ready', () => {
-  console.log( `\n--------------------\nLogged in as ${ client.user.tag }! (${ client.user.id })\n--------------------` );
-  client.user.setActivity( 'with Commando' );
+fs.readdir( './bot/events', ( err, files ) => {
+  if ( err ) return console.error;
+  for ( const file of files ) {
+    if ( !file.endsWith( '.js' ) ) continue;
+    const event = require( `./bot/events/${ file }` ).default;
+    bot.on( file.slice( 0, -3 ), event.bind( bot ) );
+  }
 } );
 
-client.on( 'error', console.error );
+bot.once( 'ready', () => {
+  console.log( `\n--------------------\nLogged in as ${ bot.user.tag }! (${ bot.user.id })\n--------------------` );
+  bot.user.setActivity( 'with Commando' );
+} );
 
-client.login( BOT_TOKEN );
+bot.on( 'error', console.error );
+
+bot.login( BOT_TOKEN );

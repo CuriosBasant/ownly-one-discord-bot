@@ -15,7 +15,7 @@ export default class MemeCommand extends Command {
 
   async run ( message ) {
     const meme = await fetch( 'https://meme-api.herokuapp.com/gimme' ).then( response => response.json() );
-    // const meme = data.data.memes[Math.random() * data.data.memes.length | 0];
+
     const embed = new MessageEmbed()
       .setColor( '#EFFF00' )
       .setTitle( meme.title )

@@ -7,7 +7,7 @@ export default class PruneCommand extends Command {
       aliases: ['delete', 'remove'],
       group: 'moderation',
       memberName: 'prune',
-      description: '',
+      description: 'Prunes (Deletes) latest messages of specified count from the current channel',
       args: [
         {
           key: 'count',
