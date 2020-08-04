@@ -3,13 +3,13 @@ import { Collection } from 'discord.js';
 import { join } from 'path';
 import fs from 'fs';
 
-import { BOT_PREFIX, OWNER_ID, BOT_TOKEN } from './config';
+import { BOT_PREFIX, OWNER_ID, BOT_TOKEN, SERVER_INVITE_LINK } from './config';
 
 
 const bot = new CommandoClient( {
   commandPrefix: BOT_PREFIX,
   owner: OWNER_ID,
-  invite: 'https://discord.gg/uW82j6S',
+  invite: SERVER_INVITE_LINK,
   // unknownCommandResponse: true,
   disableEveryone: true,
 } );

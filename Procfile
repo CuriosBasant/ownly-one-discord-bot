@@ -1,1 +1,1 @@
-worker: node production
+worker: yarn production

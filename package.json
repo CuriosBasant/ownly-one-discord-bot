@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node -r esm .",
-    "production": "NODE_ENV=production&&npm start",
+    "production": "set NODE_ENV=production&&npm start",
     "dev": "set NODE_ENV=development&&npm start",
     "debug": "set NODE_ENV=development&&node --nolazy --debug-brk=8080 index.js"
   },
