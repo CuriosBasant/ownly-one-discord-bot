@@ -7,7 +7,7 @@ export default class JoinCommand extends Command {
       aliases: [],
       group: 'music',
       memberName: 'join',
-      description: '',
+      description: 'Joins the bot to a Voice Channel the user is in',
     } );
   }
 

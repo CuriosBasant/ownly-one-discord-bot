@@ -1,4 +1,5 @@
 import { OWNER_ID } from "../config";
+import Moment from 'moment';
 
 export function showOnConsole ( msg, data, type = 'error' ) {
   const text = `\n----------------------\n${ msg }\n----------------------\n`;
@@ -76,7 +77,11 @@ export class Cooldown {
     this.start();
   }
 }
-
+export const code = str => `\`\`\`${ str }\`\`\``;
+export const infoTime = time => {
+  const createdAt = Moment( time );
+  return code( `${ createdAt.format( 'llll' ) } (${ createdAt.fromNow() })` );
+};
 export const emojies = {
   yt: '<:youtube:739480676604051537>',
   search: '🔎',
@@ -86,6 +91,21 @@ export const emojies = {
   nought: '⭕',
   pane: '⬛',
   manShrugging: '🤷‍♂️',
+  fun: '😜',
+  note: '🎵',
+  money: '💸',
+  config: '🛠️',
+  misc: '🔰',
+  premium: '💎',
+  info: '📝',
+  frame: '🖼️',
+  mod: '👥',
+  user: '👤',
+  text: '🛡️',
+  voice: '🔊',
+  category: '📦',
+  server: '💠',
+  game: '🎮',
   a: '🇦', b: '🇧', c: '🇨', d: '🇩', e: '🇪',
   f: '🇫', g: '🇬', h: '🇭', i: '🇮', j: '🇯',
   k: '🇰', l: '🇱', m: '🇲', n: '🇳', o: '🇴',

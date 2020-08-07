@@ -14,22 +14,27 @@ export default class MoveCommand extends Command {
       args: [
         {
           key: 'targetVoiceChannel',
-          type: 'channel',
+          type: 'voice-channel',
           prompt: 'Where to move the members?',
-          parse: ( channelName, message ) => message.guild.channels.cache
-            .find( channel => channel.type == 'voice' && channel.name.toLowerCase().includes( channelName.toLowerCase() ) ),
-          error: 'That channel doesnot exist in this server. Please try again!',
-          // validate: value => value,
+          error: 'I couldn\'t find that channel on this server. Please try again!',
+        }, {
+          default: false,
+          key: 'members',
+          type: 'member',
+          prompt: 'Whom to move?',
+          infinite: true,
         }
       ]
     } );
   }
 
-  run ( message, { targetVoiceChannel } ) {
+  run ( message, { targetVoiceChannel, members } ) {
     const currentVoiceChannel = message.member.voice.channel;
+    if ( !currentVoiceChannel ) return message.say( 'You need to connect to a vc' );
     let membersToMove = currentVoiceChannel.members;
-
-    // membersToMove = message.mentions.members; //.filter( member => currentVoiceChannel.members.has( member.id ) );
+    if ( members ) {
+      membersToMove = membersToMove.filter( member => members.includes( member ) );
+    }
 
     membersToMove.forEach( member => member.voice.setChannel( targetVoiceChannel ) );
     message.react( emojies.thumbup );

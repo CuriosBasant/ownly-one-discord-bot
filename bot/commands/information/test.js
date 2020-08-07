@@ -6,11 +6,12 @@ export default class TestCommand extends Command {
   constructor( client ) {
     super( client, {
       name: 'test',
-      aliases: [],
+      // aliases: [],
       group: 'information',
       ownerOnly: true,
       memberName: 'test',
       description: 'Just Some testing stuff',
+      hidden: true,
       args: [
         {
           default: 'a default value',
@@ -18,13 +19,21 @@ export default class TestCommand extends Command {
           type: 'integer|string',
           prompt: 'What can I test for you?',
           // parse: () => 'hello this is me'
+        }, {
+          default: false,
+          key: 'members',
+          type: 'member',
+          prompt: 'Whom to move?',
+          infinite: true,
         }
       ]
     } );
   }
 
-  run ( message, { text } ) {
-    this.testEmoji( message, text );
+  run ( message, { text, members, channel } ) {
+    console.log( members.reduce( ( str, member ) => str += member.displayName + ' ', '' ) );
+    console.log( channel.name );
+    // this.testEmoji( message, text );
   }
 
   testEmoji ( message, text ) {

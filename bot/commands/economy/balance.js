@@ -7,7 +7,8 @@ export default class BalanceCommand extends Command {
       aliases: [],
       group: 'economy',
       memberName: 'balance',
-      description: '',
+      description: 'Checks the balance of the user',
+      hidden: true,
       args: [
         {
           key: 'member',

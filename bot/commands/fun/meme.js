@@ -6,7 +6,7 @@ export default class MemeCommand extends Command {
   constructor( client ) {
     super( client, {
       name: 'meme',
-      aliases: ['funny', 'whatis'],
+      aliases: ['funny'],
       group: 'fun',
       memberName: 'meme',
       description: 'Posts a random meme.',

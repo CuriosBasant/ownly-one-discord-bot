@@ -21,7 +21,7 @@ export default class TicTacToeCommand extends Command {
     super( client, {
       name: 'tictactoe',
       aliases: ['ttt'],
-      group: 'fun',
+      group: 'game',
       memberName: 'tictactoe',
       description: 'Let\'s you play the TicTacToe game!',
       args: [

@@ -11,6 +11,7 @@ export default class ChatCommand extends Command {
       group: 'fun',
       memberName: 'chat',
       description: 'Talk with Ownly One',
+      // unknown: true,
       args: [
         {
           key: 'query',

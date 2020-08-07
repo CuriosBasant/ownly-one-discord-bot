@@ -9,7 +9,7 @@ export default class PollCommand extends Command {
       aliases: ['ask'],
       group: 'miscellaneous',
       memberName: 'poll',
-      description: '',
+      description: 'Adds a poll',
       args: [
         {
           key: 'text',

@@ -18,6 +18,8 @@
     "discord.js-commando": "discordjs/Commando",
     "esm": "^3.2.25",
     "ffmpeg-static": "^4.2.4",
+    "moment": "^2.27.0",
+    "weather-js": "^2.0.0",
     "ytdl-core-discord": "^1.2.0"
   },
   "devDependencies": {

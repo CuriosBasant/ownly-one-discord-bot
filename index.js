@@ -14,20 +14,25 @@ const bot = new CommandoClient( {
   disableEveryone: true,
 } );
 
-bot.SERVERS = new Collection();
-
 bot.registry
-  .registerDefaults()
+  .registerDefaultTypes()
+  .registerDefaultGroups()
+  .registerDefaultCommands( { help: false } )
+  // .registerDefaults()
+  // .unregisterCommand(command)
   .registerGroups( [
-    ['fun', 'A Fun Group'],
-    ['image', ''],
-    ['information', ''],
-    ['miscellaneous', ''],
+    ['fun', 'Fun'],
+    ['image', 'Image'],
+    ['information', 'Information'],
+    ['miscellaneous', 'Miscellaneous'],
     ['moderation', 'Moderation'],
-    ['music', 'Music Group'],
+    ['music', 'Music'],
+    ['game', 'Game'],
     ['economy', 'Economy'],
   ] )
   .registerCommandsIn( join( __dirname, './bot/commands' ) );
+
+bot.SERVERS = new Collection();
 
 fs.readdir( './bot/events', ( err, files ) => {
   if ( err ) return console.error;

@@ -13,15 +13,15 @@ export default class EmojifyCommand extends Command {
   }
 
   run ( message, text ) {
-    let emojifiedText = '';
-    const formattedText = text.trim().replace( /\s\s+/g, ' ' ).toLowerCase();
-    for ( const letter of formattedText ) {
-      let toAppend = emojies[letter];
-      if ( letter == ' ' ) toAppend = '   ';
-      else if ( toAppend ) continue;
+    const arr = text.trim().replace( /\s\s+/g, ' ' ).toLowerCase().split( '' );
 
-      emojifiedText += toAppend + ' ';
-    }
+    const emojifiedText = arr.reduce( ( str, letter ) => {
+      return str += letter == ' ' ? '    ' :
+        emojies[letter] ? emojies[letter] + ' ' : '';
+      // const toAppend = emojies[letter];
+      // return str += ( !toAppend ? '' : toAppend + ' ' );
+    }, '' );
+
     message.say( emojifiedText );
   }
 }

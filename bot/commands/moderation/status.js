@@ -8,6 +8,7 @@ export default class StatusCommand extends Command {
       group: 'moderation',
       memberName: 'status',
       description: '',
+      ownerOnly: true,
       args: [
         {
           key: 'text',
