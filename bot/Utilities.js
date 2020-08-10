@@ -11,9 +11,7 @@ export function reactEmojies ( message, array ) {
   message.react( array.shift() ).then( () => reactEmojies( message, array ) );
 }
 
-export function isOwner ( user ) {
-  return user.id == OWNER_ID;
-}
+export const isOwner = user => user.id == OWNER_ID;
 
 // const options;
 export async function confirm ( question, channel,
@@ -33,7 +31,7 @@ export async function confirm ( question, channel,
 }
 
 export class ReactionButton {
-  constructor( message, emojies, { cooldown = 3, filter = () => true, onCollected = () => null } = {} ) {
+  constructor( message, emojies, { cooldown = 3, filter = () => true, onCollected = () => null, idle = null } = {} ) {
     this.message = message;
     this.emojies = emojies;
     this.user = null;
@@ -43,12 +41,11 @@ export class ReactionButton {
         if ( user.bot || !emojies.has( reaction.emoji.name ) ) return false;
         reaction.users.remove( user );
 
-        return !this.cooldown.isRunning && filter( user, reaction );
-      }, {}
+        return user.id == OWNER_ID || !this.cooldown.isRunning && filter( user, reaction );
+      }, { idle }
     );
 
     this.collector.on( 'collect', ( reaction, user ) => {
-      if ( !emojies.has( reaction.emoji.name ) ) return;
       this.user = user;
       this.cooldown.start();
       onCollected( user );
@@ -58,6 +55,8 @@ export class ReactionButton {
     reactEmojies( this.message, [...emojies.keys()] );
   }
 }
+
+
 
 export class Cooldown {
   constructor( time ) {
@@ -106,6 +105,7 @@ export const emojies = {
   category: '📦',
   server: '💠',
   game: '🎮',
+  red: '🔴', yellow: '🟡',
   a: '🇦', b: '🇧', c: '🇨', d: '🇩', e: '🇪',
   f: '🇫', g: '🇬', h: '🇭', i: '🇮', j: '🇯',
   k: '🇰', l: '🇱', m: '🇲', n: '🇳', o: '🇴',
@@ -119,4 +119,8 @@ export const emojies = {
   '*': '*⃣',
   '!': '❗',
   '?': '❓',
+  arrowUp: '⬆️',
+  arrowDown: '⬇️',
+  arrowLeft: '⬅️',
+  arrowRight: '➡️',
 };

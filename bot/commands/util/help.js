@@ -52,12 +52,11 @@ export default class HelpCommand extends Command {
       helpEmbed
         .setTitle( `${ emojies.info } COMMAND INFORMATION ${ emojies.info }` )
         .addField( 'Name', code( command.name ), true )
-        .addField( 'Aliases', code( command.aliases.join( ', ' ) || 'No aliases set' ), true )
-        .addField( 'Description', code( command.description || 'No description set' ) )
         .addField( 'Group', code( command.group.name ), true )
-        .addField( 'Format', code( command.format || 'No formatting required' ) )
+        .addField( 'Aliases', code( command.aliases.join( ', ' ) || 'No aliases set' ) )
+        .addField( 'Description', code( command.description || 'No description set' ) )
+        .addField( 'Format', code( `${ command.client.commandPrefix }${ command.name } ${ command.format }` || 'No formatting required' ) )
         ;
-
       command.details && helpEmbed.addField( 'Details', code( command.details ) );
       // console.log( command );
     }

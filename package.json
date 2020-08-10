@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node -r esm .",
     "production": "set NODE_ENV=production&&npm start",
-    "dev": "set NODE_ENV=development&&npm start",
+    "dev": "set NODE_ENV=development&&nodemon --delay 1 -r esm .",
     "debug": "set NODE_ENV=development&&node --nolazy --debug-brk=8080 index.js"
   },
   "dependencies": {

@@ -9,14 +9,22 @@ export default class MeowCommand extends Command {
       description: 'Shows the current discord avatar unless not mentioned someone!',
       group: 'image',
       memberName: 'avatar',
+      args: [
+        {
+          default: false,
+          key: 'user',
+          type: 'user',
+          prompt: 'Whom you want to see the avatar of?'
+        }
+      ]
     } );
   }
 
-  run ( message ) {
-    const user = message.mentions.users.first() || message.author;
+  run ( message, { user } ) {
+    const pfpOf = user || message.author;
     const imageEmbed = new MessageEmbed()
       .setAuthor( `Requested By: ${ message.author.username }` )
-      .setImage( user.displayAvatarURL( { format: 'png', dynamic: true } ) );
+      .setImage( pfpOf.displayAvatarURL( { format: 'png', dynamic: true, size: 512 } ) );
     return message.embed( imageEmbed );
   }
 }
